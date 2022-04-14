@@ -1,0 +1,79 @@
+<?php
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
+    // print_r($_POST);
+
+    // die();
+    
+   function redirect($location)
+
+    {
+
+    header("Location: " . $location);
+
+    exit;
+
+    }    
+
+   // print "Hello";
+    
+    $name = $_POST['name'];
+    
+    $email = $_POST['email'];
+
+    $topic = $_POST['topic'];
+
+    $messag = $_POST['messag'];
+    
+    $to = "";
+    
+    $subject = "New Info";
+
+ $message = "
+<html>
+<head>
+<title>New Info</title>
+</head>
+<body>
+<p>
+
+name: ".$name." <br>
+
+email address: ".$email." <br>
+
+topic: ".$topic." <br>
+
+messag: ".$messag." <br>
+
+</p>
+</body>
+</html>
+";
+
+// Always set content-type when sending HTML email
+$headers = "MIME-Version: 1.0" . "\r\n";
+$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+// More headers
+$headers .= 'From: <info@twscrap.com>' . "\r\n";
+$headers .= 'Cc: info@twscrap.com' . "\r\n";
+
+$mail = mail($to,$subject,$message,$headers);
+
+// $mail = TRUE;
+
+if($mail){
+    
+    
+    // print "<script>alert('Sent')</script>";
+    
+        print redirect("/contact.html");
+    
+}
+
+
+    
+}
+
+?> 
